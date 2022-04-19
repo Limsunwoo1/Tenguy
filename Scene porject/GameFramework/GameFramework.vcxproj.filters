@@ -97,6 +97,12 @@
     <ClInclude Include="CTitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="CStage1.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CStage2.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIManager.cpp">
@@ -142,6 +148,12 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="CTitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage1.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage2.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>

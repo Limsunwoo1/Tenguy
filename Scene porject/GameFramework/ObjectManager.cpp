@@ -65,10 +65,10 @@ void ObjectManager::Render(HDC Inhdc)
 		Player->Render(Inhdc);
 
 	wchar_t buffer[100] = {};
-	swprintf_s(buffer, L"%d", testPobj->GetPlayerLIfe());
+	//swprintf_s(buffer, L"%d", testPobj->GetPlayerLIfe());
 
 	SelectObject(Inhdc, BLACK);
-	TextOut(Inhdc, Player->GetPosition().x  , Player->GetPosition().y  , buffer, 1); // 플레이어의 라이프 표시
+//	TextOut(Inhdc, Player->GetPosition().x  , Player->GetPosition().y  , buffer, 1); // 플레이어의 라이프 표시
 
 
 	SelectObject(Inhdc, BACKGROUND);

@@ -8,9 +8,9 @@ class CSceneManager
 	SINGLE(CSceneManager);
 
 private:
-	CScene*	 CurScene;
 
 public:
+	CScene*	 CurScene;     //잠시내림
 	void Init();
 	void Update(float InDeltaTime);
 

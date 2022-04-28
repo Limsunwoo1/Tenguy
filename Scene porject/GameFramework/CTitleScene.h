@@ -1,11 +1,14 @@
 #pragma once
 #include "CScene.h"
+#include "Button.h"
+#include <vector>
 class CTitleScene :
     public CScene
 {
-private:
-
+protected:
+    std::vector <CUI*> TiltleUI;
 public:
+
     CTitleScene();
     ~CTitleScene();
 
@@ -13,5 +16,8 @@ public:
     virtual void Clear() override;   // 현재 씬의 정보를 전부 소멸시킨다
 
     virtual void Update(float InDeltaTime) override;
+
+    bool GetTrue() { return test; };
+
 };
 

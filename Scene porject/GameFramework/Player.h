@@ -10,6 +10,7 @@ class CPlayer :
     float   BulletSpawnCollTimeCurrent;
 public:
     CPlayer();
+    CPlayer(Vector2D& InVector, Vector2D& InScale);
     ~CPlayer();
 
     virtual void Update(float InDeltaTime) override;

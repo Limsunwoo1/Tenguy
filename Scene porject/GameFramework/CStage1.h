@@ -1,9 +1,26 @@
 #pragma once
 #include "CScene.h"
+#include "Object.h"
+#include "Array.h"
+
 class CStage1 :
     public CScene
 {
 private:
+    CArray<CObject*> ObjectArray;
+    CObject* Player;
+    CObject* Bullet;
+    CObject* Box;
+    CObject* BoxAttack;
+
+    POINT BoxAttackObjectPosition;
+
+    float	BoxSpawnCoolTimeMax;
+    float	BoxSpawnCoolTimeCurrent;
+
+    float	BoxAttackObjectSpawnCoolTimeMax;
+    float	BoxAttackObjectSpawnCoolTimeCurrent;
+    float	BoxAttackObjectSpawnTimeCurrent;
 
 public:
     CStage1();
@@ -13,5 +30,9 @@ public:
     virtual void Clear() override;   // 현재 씬의 정보를 전부 소멸시킨다
 
     virtual void Update(float InDeltaTime) override;
+
+public:
+    virtual void AddBox(float InDeltaTime) override;
+    virtual void BoxAttackObject(float InDeltaTime) override;
 };
 

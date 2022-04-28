@@ -12,7 +12,9 @@ public:
 	virtual void Clear();   // 현재 씬의 정보를 전부 소멸시킨다
 
 	// 구조에따라 필요할수도있고 필요없을수도 있다
-	virtual void Update(float InDeltaTime) {}
+	virtual void Update(float InDeltaTime) {};
+	virtual void AddBox(float InDeltaTime) {};
+	virtual void BoxAttackObject(float InDeltaTime) {};
 	// virtual void Render(HDC InHdc);
 };
 

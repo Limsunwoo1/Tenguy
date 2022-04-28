@@ -5,7 +5,7 @@
 
 UIManager::UIManager()
 {
-
+	
 }
 
 UIManager::~UIManager()
@@ -18,12 +18,22 @@ UIManager::~UIManager()
 
 void UIManager::Init()
 {
-	CButton* button = new CButton(Vector2D(400.f, 400.f), Vector2D(400.f, 200.f));
-	AddUI(button);
+	
+}
+
+void UIManager::Clear(vector<CUI*> InCUI)
+{
+	/*for (CUI* myUI : MyUIList)
+		delete myUI;
+
+	MyUIList.clear();*/
 }
 
 void UIManager::Update(float InDeltaTime)
 {
+	if (MyUIList.size() == 0)
+		return;
+
 	for (CUI* myUI : MyUIList)
 	{
 		bool isColiision = CheckMouseCollision(myUI);
@@ -48,10 +58,15 @@ void UIManager::Update(float InDeltaTime)
 		if (isColiision)
 		{
 			if (KEY_STATE(KEY::LBUTTON) == KEY_STATE::HOLD)
+			{
 				myUI->MouseLButtonPress();
+				myUI->SetMousePrs(true);
+			}
 			else if (KEY_STATE(KEY::LBUTTON) == KEY_STATE::AWAY)
+			{
 				myUI->MouseLButtonRelease();
-
+				myUI->SetMousePrs(false);
+			}
 			if (KEY_STATE(KEY::RBUTTON) == KEY_STATE::HOLD)
 				myUI->MouseRButtonPress();
 			else if (KEY_STATE(KEY::RBUTTON) == KEY_STATE::AWAY)
@@ -64,6 +79,9 @@ void UIManager::Update(float InDeltaTime)
 
 void UIManager::Render(HDC Inhdc)
 {
+	if (MyUIList.size() == 0)
+		return;
+
 	for (CUI* myUI : MyUIList)
 		myUI->Render(Inhdc);
 }
@@ -90,4 +108,20 @@ bool UIManager::CheckMouseCollision(CUI* InUI)
 		return false;
 
 	return true;
+}
+
+void UIManager::SetUI(vector<CUI*> InCUI)
+{
+	if (InCUI.size() == 0)
+		MyUIList.clear();
+
+	for (CUI* myCUI : InCUI)
+	{
+		AddUI(myCUI);
+	}
+}
+
+void UIManager::SetTitelUI(bool InCur)
+{
+	titleUI = InCur ;
 }

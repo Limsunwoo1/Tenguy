@@ -11,6 +11,14 @@ CPlayer::CPlayer() : CObject(Vector2D{ 100, 100 }, Vector2D{ 50, 50 })
 	BulletSpawnCollTimeCurrent = 0.f;
 }
 
+CPlayer::CPlayer(Vector2D& InVector, Vector2D& InScale) : CObject(Vector2D{ InVector.x , InVector.y }, Vector2D{ InScale.x, InScale.y })
+{
+	this->life = 3;
+
+	BulletSpawnCoolTimeMax = 0.1f;
+	BulletSpawnCollTimeCurrent = 0.f;
+}
+ 
 CPlayer::~CPlayer()
 {
 
@@ -95,5 +103,8 @@ void CPlayer::SetPlayerLIfe(int SetLife)
 
 int CPlayer::GetPlayerLIfe()
 {
+	if (this == nullptr)
+		return 0;
+
 	return this->life;
 }

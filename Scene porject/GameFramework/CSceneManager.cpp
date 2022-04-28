@@ -31,3 +31,4 @@ void CSceneManager::SetCurScene(CScene* InNewScene)
 	CurScene = InNewScene;
 	CurScene->Init();
 }
+

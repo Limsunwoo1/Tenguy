@@ -8,7 +8,6 @@ class CButton :
 {
 private:
     string ButtonText;
-
 public:
     CButton(Vector2D InPosition, Vector2D InScale);
     virtual ~CButton();

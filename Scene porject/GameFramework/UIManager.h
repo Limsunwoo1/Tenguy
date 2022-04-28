@@ -2,7 +2,7 @@
 #include "Define.h"
 #include <windows.h>
 #include <vector>
-
+#include "Button.h"
 class CUI;
 
 class UIManager
@@ -11,7 +11,7 @@ class UIManager
 
 private:
 	std::vector<CUI*> MyUIList;
-
+	bool titleUI;
 public:
 	void Init();
 	void Update(float InDeltaTime);
@@ -20,5 +20,10 @@ public:
 	void AddUI(CUI* InUI);
 
 	bool CheckMouseCollision(CUI* InUI);
+
+	void SetUI(vector<CUI*> InCUI);
+	void Clear(vector<CUI*> InCUI);
+
+	void SetTitelUI(bool InCur);
 };
 

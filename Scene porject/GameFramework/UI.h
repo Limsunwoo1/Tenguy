@@ -5,6 +5,7 @@ class CUI :
 {
 private:
     bool IsMouseOn;     // 마우스가 올려져있는가
+    bool IsMousePrs;    // 마우스가 눌렸는가
 
 public:
     CUI();
@@ -24,6 +25,9 @@ public:
 public:
     void SetMouseOn(bool InMouseOn) {IsMouseOn = InMouseOn;}
     bool GetMouseOn() {return IsMouseOn;}
+
+    void SetMousePrs(bool InMousePrs) { IsMousePrs = InMousePrs; }
+    bool GetMousePrs() { return IsMousePrs; }
 
 };
 

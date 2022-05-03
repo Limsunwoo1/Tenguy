@@ -11,7 +11,6 @@ class UIManager
 
 private:
 	std::vector<CUI*> MyUIList;
-	bool titleUI;
 public:
 	void Init();
 	void Update(float InDeltaTime);
@@ -24,6 +23,5 @@ public:
 	void SetUI(vector<CUI*> InCUI);
 	void Clear(vector<CUI*> InCUI);
 
-	void SetTitelUI(bool InCur);
 };
 

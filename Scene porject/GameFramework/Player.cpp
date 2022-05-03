@@ -2,6 +2,7 @@
 #include "KeyManager.h"
 #include "ObjectManager.h"
 #include "BulletObject.h"
+#include "CSceneManager.h"
 
 CPlayer::CPlayer() : CObject(Vector2D{ 100, 100 }, Vector2D{ 50, 50 })
 {
@@ -36,7 +37,7 @@ void CPlayer::Update(float InDeltaTime)
 
 			BulletObject* Bullet = new BulletObject(Vector2D{ PST.x ,PST.y }, Vector2D{ 20 ,20 });
 			Bullet->SetObjectType(EOBJ_TYPE::ELLIPSE);
-			ObjectManager::GetInstance()->AddObject(Bullet);
+			CSceneManager::GetInstance()->AddObject(Bullet);
 
 			BulletSpawnCollTimeCurrent = 0.f;
 		}

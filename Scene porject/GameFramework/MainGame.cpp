@@ -93,6 +93,7 @@ void CMainGame::Render()
 
 	ObjectManager::GetInstance()->Render(BackHdc);
 	UIManager::GetInstance()->Render(BackHdc);
+	CSceneManager::GetInstance()->Render(BackHdc);
 
 	BitBlt(Hdc, 0, 0, 980, 680, BackHdc, 0, 0, SRCCOPY);
 	// ====================================

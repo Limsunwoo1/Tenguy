@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Func.h"
+#include "CSceneManager.h"
 
 BoxObject::BoxObject()
 {
@@ -29,7 +30,7 @@ void BoxObject::Update(float InDeltaTime)
 
 void BoxObject::BoxRemove()
 {
-	std::vector<CObject*> InVecotr = ObjectManager::GetInstance()->Get_Object();
+	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
 
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
@@ -39,20 +40,21 @@ void BoxObject::BoxRemove()
 		if (InVecotr[i]->GetPosition().x <= 0)
 		{
 			InVecotr.erase(InVecotr.begin() + i);
-			ObjectManager::GetInstance()->SetVectorSize(InVecotr);
+			CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 			InVecotr.clear();
 
 			//std::cout << "박스 삭제" << std::endl;
-			continue;
+			break;
 		}
 	}
 }
 
 void BoxObject::Hit()
 {
-	for (int i = 0; i < ObjectManager::GetInstance()->Get_Object().size(); ++i)
+	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
+
+	for (int i = 0; i < CSceneManager::GetInstance()->Get_Object().size(); ++i)
 	{
-		std::vector<CObject*> InVecotr = ObjectManager::GetInstance()->Get_Object();
 
 		if (InVecotr[i]->GetObjectType() != EOBJ_TYPE::ELLIPSE)
 			continue;
@@ -62,11 +64,11 @@ void BoxObject::Hit()
 				continue;
 
 		InVecotr.erase(InVecotr.begin() + i);
-		ObjectManager::GetInstance()->SetVectorSize(InVecotr);
+		CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 		InVecotr.clear();
 
 		int cnt = 0;
-		std::vector<CObject*> InVecotr2 = ObjectManager::GetInstance()->Get_Object();
+		std::vector<CObject*> InVecotr2 = CSceneManager::GetInstance()->Get_Object();
 
 		for (int i = 0; i < InVecotr2.size(); ++i)
 		{
@@ -78,7 +80,7 @@ void BoxObject::Hit()
 		}
 		std::cout << "충돌" << std::endl;
 		InVecotr2.erase(InVecotr2.begin() + cnt);
-		ObjectManager::GetInstance()->SetVectorSize(InVecotr2);
+		CSceneManager::GetInstance()->SetVectorSize(InVecotr2);
 		InVecotr2.clear();
 	}
 }

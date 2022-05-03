@@ -39,8 +39,6 @@ void CTitleScene::Clear()
 	TiltleUI.clear();
 
 	UIManager::GetInstance()->SetUI(TiltleUI);
-	UIManager::GetInstance()->SetTitelUI(test);
-
 }
 
 void CTitleScene::Update(float InDeltaTime)

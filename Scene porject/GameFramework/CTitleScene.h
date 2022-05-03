@@ -17,7 +17,6 @@ public:
 
     virtual void Update(float InDeltaTime) override;
 
-    bool GetTrue() { return test; };
 
 };
 

@@ -62,6 +62,9 @@ void CObject::Update(float InDeltaTime)
 
  void CObject::SetObjectType(EOBJ_TYPE objType)
  {
+	 if (this ==  nullptr)
+		 return;
+
 	 ObjType = objType;
  }
 

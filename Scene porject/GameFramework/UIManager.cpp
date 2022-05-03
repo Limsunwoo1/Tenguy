@@ -120,8 +120,3 @@ void UIManager::SetUI(vector<CUI*> InCUI)
 		AddUI(myCUI);
 	}
 }
-
-void UIManager::SetTitelUI(bool InCur)
-{
-	titleUI = InCur ;
-}

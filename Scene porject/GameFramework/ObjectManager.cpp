@@ -4,11 +4,12 @@
 #include "Func.h"
 #include "Player.h"
 #include <windows.h>
+#include "CSceneManager.h"
 
- HBRUSH BLACK = CreateSolidBrush(RGB(0, 0, 0));
- HBRUSH RED = CreateSolidBrush(RGB(255, 0, 0));
- HBRUSH GREEN = CreateSolidBrush(RGB(0, 128, 0));
- HBRUSH BACKGROUND = CreateSolidBrush(RGB(255, 255, 255));
+ HBRUSH BLACK_ = CreateSolidBrush(RGB(0, 0, 0));
+ //HBRUSH RED = CreateSolidBrush(RGB(255, 0, 0));
+ HBRUSH GREEN_ = CreateSolidBrush(RGB(0, 128, 0));
+ HBRUSH BACKGROUND_ = CreateSolidBrush(RGB(255, 255, 255));
 
 ObjectManager::ObjectManager()
 {
@@ -17,10 +18,7 @@ ObjectManager::ObjectManager()
 
 ObjectManager::~ObjectManager()
 {
-	for(CObject* object : OBJvector)
-		delete object;
 
-	OBJvector.clear();
 }
 
 void ObjectManager::Init()
@@ -31,11 +29,11 @@ void ObjectManager::Init()
 void ObjectManager::Update(float InDeltaTime)
 {
 
-	for (int i = 0; i < OBJvector.size(); ++i)
+	/*for (int i = 0; i < OBJvector.size(); ++i)
 	{
 		OBJvector[i]->Update(InDeltaTime);
 		
-	}
+	}*/
 	
 	if (Player)
 		Player->Update(InDeltaTime);
@@ -43,7 +41,7 @@ void ObjectManager::Update(float InDeltaTime)
 
 void ObjectManager::Render(HDC Inhdc)
 {
-	for (int i = 0; i < OBJvector.size(); ++i)
+	/*for (int i = 0; i < OBJvector.size(); ++i)
 	{
 		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE)
 		{
@@ -58,20 +56,22 @@ void ObjectManager::Render(HDC Inhdc)
 			SelectObject(Inhdc, BLACK);
 		}
 		OBJvector[i]->Render(Inhdc);
-	}
+	}*/
 	
-	SelectObject(Inhdc, GREEN);
+	SelectObject(Inhdc, GREEN_);
 	if (Player)
 		Player->Render(Inhdc);
 
-	wchar_t buffer[100] = {};
-	//swprintf_s(buffer, L"%d", testPobj->GetPlayerLIfe());
+	if (Player)
+	{
+		wchar_t buffer[100] = {};
+		swprintf_s(buffer, L"%d", testPobj->GetPlayerLIfe());
 
-	SelectObject(Inhdc, BLACK);
-//	TextOut(Inhdc, Player->GetPosition().x  , Player->GetPosition().y  , buffer, 1); // 플레이어의 라이프 표시
+		SelectObject(Inhdc, BLACK_);
+		TextOut(Inhdc, Player->GetPosition().x, Player->GetPosition().y, buffer, 1); // 플레이어의 라이프 표시
 
-
-	SelectObject(Inhdc, BACKGROUND);
+	}
+	SelectObject(Inhdc, BACKGROUND_);
 }
 
 void ObjectManager::SetPlayer(CObject* InPayer)
@@ -80,44 +80,44 @@ void ObjectManager::SetPlayer(CObject* InPayer)
 	Dynamic_Cast();
 }
 
-void ObjectManager::AddObject(CObject* InObject)
-{
-	OBJvector.push_back(InObject);
-}
+//void ObjectManager::AddObject(CObject* InObject)
+//{
+//	OBJvector.push_back(InObject);
+//}
 
 CObject* ObjectManager::GetPlayer()
 {
 	return Player;
 }
 
-std::vector<CObject*> ObjectManager::Get_Object()
-{
-	return OBJvector;
-}
+//std::vector<CObject*> ObjectManager::Get_Object()
+//{
+//	return OBJvector;
+//}
 
-void ObjectManager::SetVectorSize(std::vector<CObject*> InVC)
-{
-	OBJvector.swap(InVC);
-}
+//void ObjectManager::SetVectorSize(std::vector<CObject*> InVC)
+//{
+//	OBJvector.swap(InVC);
+//}
 
 
-bool ObjectManager::Player_Hit()
-{
-	for(int i = 0 ;i < OBJvector.size(); ++i)
-	{
-		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE || OBJvector[i]->GetObjectType() == EOBJ_TYPE::Bullet)
-		{
-			if(!CheckCollision(Player->GetPosition(), Player->GetScale(), OBJvector[i]->GetPosition(), OBJvector[i]->GetScale()))
-				continue;
-
-			delete *(OBJvector.begin() + i);
-			OBJvector.erase(OBJvector.begin() + i);
-			return true;
-		}
-
-	}
-	return false;
-}
+//bool ObjectManager::Player_Hit()
+//{
+//	for(int i = 0 ;i < OBJvector.size(); ++i)
+//	{
+//		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE || OBJvector[i]->GetObjectType() == EOBJ_TYPE::Bullet)
+//		{
+//			if(!CheckCollision(Player->GetPosition(), Player->GetScale(), OBJvector[i]->GetPosition(), OBJvector[i]->GetScale()))
+//				continue;
+//
+//			delete *(OBJvector.begin() + i);
+//			OBJvector.erase(OBJvector.begin() + i);
+//			return true;
+//		}
+//
+//	}
+//	return false;
+//}
 
 void ObjectManager:: Dynamic_Cast()
 {

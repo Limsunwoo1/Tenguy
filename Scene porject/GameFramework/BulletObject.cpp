@@ -1,6 +1,6 @@
 #include "BulletObject.h"
 #include <iostream>
-
+#include "CSceneManager.h"
 BulletObject::BulletObject()
 	:CObject()
 {
@@ -28,20 +28,20 @@ void BulletObject::Update(float InDeltaTime)
 
 void BulletObject::BulletRemove()
 {
-	for (int i = 0; i < ObjectManager::GetInstance()->Get_Object().size(); ++i)
+	for (int i = 0; i < CSceneManager::GetInstance()->Get_Object().size(); ++i)
 	{
-		std::vector<CObject*> InVecotr = ObjectManager::GetInstance()->Get_Object();
+		std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
 
 		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
 		{
 			if (InVecotr[i]->GetPosition().x >= 980)
 			{
 				InVecotr.erase(InVecotr.begin() + i);
-				ObjectManager::GetInstance()->SetVectorSize(InVecotr);
+				CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 				InVecotr.clear();
 
 				//std::cout << "ÃÑ¾Ë »èÁ¦"  << std::endl;
-				continue;
+				break;
 			}
 		}
 		else

@@ -13,7 +13,7 @@ private:
 	CScene*	 CurScene;     //잠시내림
 
     CObject* Bullet;
-    CObject* Box;
+    //CObject* Box;
     CObject* BoxAttack;
 
     POINT BoxAttackObjectPosition;
@@ -32,7 +32,7 @@ public:
 
 	void SetCurScene(CScene* InNewScene);
 	void AddObject(CObject* InObject);
-    void AddBox(float InDeltaTime);
+    //void AddBox(float InDeltaTime);
 
     void BoxAttackObject(float InDeltaTime);
     bool Player_Hit();

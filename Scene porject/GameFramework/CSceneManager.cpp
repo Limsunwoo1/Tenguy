@@ -6,10 +6,10 @@
 #include "Func.h"
 #include <random>
 
-random_device rd;
-mt19937 gen(rd());
-uniform_int_distribution<int> dis(0, 980);
-uniform_int_distribution<int> Dis(50, 150);
+//random_device rd;
+//mt19937 gen(rd());
+//uniform_int_distribution<int> dis(0, 980);
+//uniform_int_distribution<int> Dis(50, 150);
 
 
 CSceneManager::CSceneManager()
@@ -33,7 +33,6 @@ void CSceneManager::Init()
 void CSceneManager::Update(float InDeltaTime)
 {
 	CurScene->Update(InDeltaTime);
-     
 }
 
 
@@ -48,20 +47,21 @@ void CSceneManager::SetCurScene(CScene* InNewScene)
 	CurScene->Init();
 }
 
-void CSceneManager::AddBox(float InDeltaTime)
-{
-	float rand = (float)Dis(gen);
-	Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
-	Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
-	Box->SetDeltaTime(InDeltaTime);
-	CurScene->AddObject(Box);
-	
-}
+//void CSceneManager::AddBox(float InDeltaTime)
+//{
+//	float rand = (float)Dis(gen);
+//	Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
+//	Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
+//	Box->SetDeltaTime(InDeltaTime);
+//	CurScene->AddObject(Box);
+//	
+//	/*delete Box;
+//	Box = nullptr;*/
+//}
 void CSceneManager::AddObject(CObject* InObject)
 {
 	CurScene->AddObject(InObject);
 }
-
 
 std::vector<CObject*> CSceneManager::Get_Object()
 {
@@ -70,7 +70,7 @@ std::vector<CObject*> CSceneManager::Get_Object()
 
 void CSceneManager::SetVectorSize(std::vector<CObject*> InVC)
 {
-	CurScene->Get_Object().swap(InVC);
+	CurScene->SetVectorSize(InVC);
 }
 
 
@@ -85,8 +85,8 @@ bool CSceneManager::Player_Hit()
 			if (!CheckCollision(Player->GetPosition(), Player->GetScale(), CurScene->Get_Object()[i]->GetPosition(), CurScene->Get_Object()[i]->GetScale()))
 				continue;
 
-			delete* (CurScene->Get_Object().begin() + i);
 			CurScene->Get_Object().erase(CurScene->Get_Object().begin() + i);
+			delete* (CurScene->Get_Object().begin() + i);
 			return true;
 		}
 

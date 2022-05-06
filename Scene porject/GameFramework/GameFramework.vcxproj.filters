@@ -103,6 +103,7 @@
     <ClInclude Include="CStage2.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Box2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIManager.cpp">
@@ -156,6 +157,7 @@
     <ClCompile Include="CStage2.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Box2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework.rc">

@@ -21,11 +21,9 @@ public:
 	void Init();
 	void Update(float InDeltaTime);
 	void Render(HDC Inhdc);
-	void SetPlayer(CObject* InPlayer);
+	void SetPlayer(CPlayer* InPlayer);
 	CObject* GetPlayer();
-
-	bool Player_Hit();
-	void Dynamic_Cast();
+	CPlayer* Dynamic_Cast(CObject* InPlayer);
 
 	//void AddObject(CObject* InObject);
 	//std::vector<CObject*>Get_Object();

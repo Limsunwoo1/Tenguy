@@ -28,42 +28,21 @@ void ObjectManager::Init()
 
 void ObjectManager::Update(float InDeltaTime)
 {
-
-	/*for (int i = 0; i < OBJvector.size(); ++i)
-	{
-		OBJvector[i]->Update(InDeltaTime);
-		
-	}*/
-	
 	if (Player)
 		Player->Update(InDeltaTime);
 }
 
 void ObjectManager::Render(HDC Inhdc)
 {
-	/*for (int i = 0; i < OBJvector.size(); ++i)
-	{
-		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE)
-		{
-			SelectObject(Inhdc, BLACK);
-		}
-		else if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
-		{
-			SelectObject(Inhdc, RED);
-		}
-		else if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::Bullet)
-		{
-			SelectObject(Inhdc, BLACK);
-		}
-		OBJvector[i]->Render(Inhdc);
-	}*/
-	
+
 	SelectObject(Inhdc, GREEN_);
 	if (Player)
 		Player->Render(Inhdc);
 
 	if (Player)
 	{
+		testPobj = static_cast<CPlayer*>(Player);
+
 		wchar_t buffer[100] = {};
 		swprintf_s(buffer, L"%d", testPobj->GetPlayerLIfe());
 
@@ -74,53 +53,20 @@ void ObjectManager::Render(HDC Inhdc)
 	SelectObject(Inhdc, BACKGROUND_);
 }
 
-void ObjectManager::SetPlayer(CObject* InPayer)
+void ObjectManager::SetPlayer(CPlayer* InPayer)
 {
 	Player = InPayer;
-	Dynamic_Cast();
 }
-
-//void ObjectManager::AddObject(CObject* InObject)
-//{
-//	OBJvector.push_back(InObject);
-//}
 
 CObject* ObjectManager::GetPlayer()
 {
 	return Player;
 }
 
-//std::vector<CObject*> ObjectManager::Get_Object()
-//{
-//	return OBJvector;
-//}
-
-//void ObjectManager::SetVectorSize(std::vector<CObject*> InVC)
-//{
-//	OBJvector.swap(InVC);
-//}
-
-
-//bool ObjectManager::Player_Hit()
-//{
-//	for(int i = 0 ;i < OBJvector.size(); ++i)
-//	{
-//		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE || OBJvector[i]->GetObjectType() == EOBJ_TYPE::Bullet)
-//		{
-//			if(!CheckCollision(Player->GetPosition(), Player->GetScale(), OBJvector[i]->GetPosition(), OBJvector[i]->GetScale()))
-//				continue;
-//
-//			delete *(OBJvector.begin() + i);
-//			OBJvector.erase(OBJvector.begin() + i);
-//			return true;
-//		}
-//
-//	}
-//	return false;
-//}
-
-void ObjectManager:: Dynamic_Cast()
+CPlayer* ObjectManager:: Dynamic_Cast(CObject* InPlayer)
 {
 	testPobj = static_cast<CPlayer*>(Player);
+	return static_cast<CPlayer*>(InPlayer);
+
 }
 

@@ -42,9 +42,8 @@ void BoxObject::BoxRemove()
 			InVecotr.erase(InVecotr.begin() + i);
 			CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 			InVecotr.clear();
-
 			//std::cout << "박스 삭제" << std::endl;
-			break;
+			//break;
 		}
 	}
 }
@@ -53,7 +52,7 @@ void BoxObject::Hit()
 {
 	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
 
-	for (int i = 0; i < CSceneManager::GetInstance()->Get_Object().size(); ++i)
+	for (int i = 0; i < InVecotr.size(); ++i)
 	{
 
 		if (InVecotr[i]->GetObjectType() != EOBJ_TYPE::ELLIPSE)
@@ -67,7 +66,7 @@ void BoxObject::Hit()
 		CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 		InVecotr.clear();
 
-		int cnt = 0;
+ 		int cnt = 0;
 		std::vector<CObject*> InVecotr2 = CSceneManager::GetInstance()->Get_Object();
 
 		for (int i = 0; i < InVecotr2.size(); ++i)
@@ -78,7 +77,7 @@ void BoxObject::Hit()
 				break;
 			}
 		}
-		std::cout << "충돌" << std::endl;
+		//std::cout << "충돌" << std::endl;
 		InVecotr2.erase(InVecotr2.begin() + cnt);
 		CSceneManager::GetInstance()->SetVectorSize(InVecotr2);
 		InVecotr2.clear();

@@ -5,6 +5,7 @@ class CScene
 {
 private:
 	 std::vector<CObject*> OBJvector;
+	 CObject* Box;
 public:
 	CScene();
 	virtual ~CScene();
@@ -16,10 +17,12 @@ public:
 	virtual void Update(float InDeltaTime) ;
 	void SetVectorSize(std::vector<CObject*> InVC);
 	void AddObject(CObject* InObject);
-	
+	void AddBox(float InDeltaTime);
 
 	virtual void BoxAttackObject(float InDeltaTime) {};
 	std::vector<CObject*> Get_Object();
-	virtual void Render(HDC InHdc);
+	void Render(HDC InHdc);
+	bool Player_Hit();
+	
 };
 

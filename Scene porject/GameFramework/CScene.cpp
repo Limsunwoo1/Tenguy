@@ -3,11 +3,20 @@
 #include "Object.h"
 #include "Func.h"
 #include "ObjectManager.h"
+#include "BoxObject.h"
+#include <random>
+#include <iostream>
+using namespace std;
 
 HBRUSH BLACK = CreateSolidBrush(RGB(0, 0, 0));
 HBRUSH RED = CreateSolidBrush(RGB(255, 0, 0));
 HBRUSH GREEN = CreateSolidBrush(RGB(0, 128, 0));
 HBRUSH BACKGROUND = CreateSolidBrush(RGB(255, 255, 255));
+
+random_device rd;
+mt19937 gen(rd());
+uniform_int_distribution<int> dis(0, 980);
+uniform_int_distribution<int> Dis(50, 150);
 
 CScene::CScene()
 {
@@ -30,16 +39,22 @@ void CScene::Clear()
 }
 void CScene::Update(float InDeltaTime)
 {
-	for (int i = 0; i < OBJvector.size(); ++i)
-	{
-		OBJvector[i]->Update(InDeltaTime);
-	}
+	
 }
 
 
 void CScene::AddObject(CObject* InObject)
 {
 	OBJvector.push_back(InObject);
+}
+
+void CScene::AddBox(float InDeltaTime)
+{
+	float rand = (float)Dis(gen);
+	Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
+	Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
+	Box->SetDeltaTime(InDeltaTime);
+	AddObject(Box);
 }
 
 std::vector<CObject*> CScene::Get_Object()
@@ -70,6 +85,24 @@ void CScene::Render(HDC InHdc)
 		}
 		OBJvector[i]->Render(InHdc);
 	}
-
 	SelectObject(InHdc, BACKGROUND);
  }
+
+bool CScene::Player_Hit()
+{
+	CObject* Player = ObjectManager::GetInstance()->GetPlayer();
+
+	for (int i = 0;i < OBJvector.size(); ++i)
+	{
+		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE || OBJvector[i]->GetObjectType() == EOBJ_TYPE::Bullet)
+		{
+			if (!CheckCollision(Player->GetPosition(), Player->GetScale(), OBJvector[i]->GetPosition(), OBJvector[i]->GetScale()))
+				continue;
+
+			delete* (OBJvector.begin() + i);
+			OBJvector.erase(OBJvector.begin() + i);
+			return true;
+		}
+	}
+	return false;
+}

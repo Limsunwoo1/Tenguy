@@ -23,7 +23,6 @@ CSceneManager::~CSceneManager()
 	CurScene->Clear();
 }
 
-
 void CSceneManager::Init()
 {
 	CurScene = new CTitleScene();
@@ -35,11 +34,11 @@ void CSceneManager::Update(float InDeltaTime)
 	CurScene->Update(InDeltaTime);
 }
 
-
 void CSceneManager::Render(HDC InHdc)
 {
 	CurScene->Render(InHdc);
 }
+
 void CSceneManager::SetCurScene(CScene* InNewScene)
 {
 	CurScene->Clear();
@@ -47,17 +46,6 @@ void CSceneManager::SetCurScene(CScene* InNewScene)
 	CurScene->Init();
 }
 
-//void CSceneManager::AddBox(float InDeltaTime)
-//{
-//	float rand = (float)Dis(gen);
-//	Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
-//	Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
-//	Box->SetDeltaTime(InDeltaTime);
-//	CurScene->AddObject(Box);
-//	
-//	/*delete Box;
-//	Box = nullptr;*/
-//}
 void CSceneManager::AddObject(CObject* InObject)
 {
 	CurScene->AddObject(InObject);
@@ -72,7 +60,6 @@ void CSceneManager::SetVectorSize(std::vector<CObject*> InVC)
 {
 	CurScene->SetVectorSize(InVC);
 }
-
 
 bool CSceneManager::Player_Hit()
 {
@@ -89,35 +76,6 @@ bool CSceneManager::Player_Hit()
 			delete* (CurScene->Get_Object().begin() + i);
 			return true;
 		}
-
 	}
 	return false;
-}
-
-
-void CSceneManager::BoxAttackObject(float InDeltaTime)
-{
-	for (int i = 0; i < CurScene->Get_Object().size(); ++i)
-	{
-		if (CurScene->Get_Object()[i]->GetObjectType() != EOBJ_TYPE::RECTANGLE)
-			continue;
-
-		BoxAttackObjectSpawnCoolTimeCurrent = CurScene->Get_Object()[i]->GetDeltaTime();
-		BoxAttackObjectSpawnCoolTimeCurrent += InDeltaTime;
-
-		if (BoxAttackObjectSpawnCoolTimeCurrent < BoxAttackObjectSpawnCoolTimeMax)
-		{
-			CurScene->Get_Object()[i]->SetDeltaTime(BoxAttackObjectSpawnCoolTimeCurrent);
-			continue;
-		}
-
-		if (BoxAttackObjectSpawnCoolTimeCurrent > BoxAttackObjectSpawnCoolTimeMax)
-		{
-			CObject* BoxAttack = new BoxObject(Vector2D{ CurScene->Get_Object()[i]->GetPosition().x, CurScene->Get_Object()[i]->GetPosition().y }, Vector2D{ 20,20 }, 1200);
-			BoxAttack->SetObjectType(EOBJ_TYPE::Bullet);
-			CurScene->Get_Object()[i]->SetDeltaTime(0.f);
-
-			AddObject(BoxAttack);
-		}
-	}
 }

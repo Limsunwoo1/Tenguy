@@ -122,3 +122,14 @@ bool CScene::Player_Hit()
 	}
 	return false;
 }
+
+void CScene::ClearObject()
+{
+	vector<CObject*>::iterator iter;
+	int cnt = 0;
+	for (iter = OBJvector.begin();iter != OBJvector.end();iter++)
+	{
+		delete OBJvector[cnt];
+		cnt++;
+	}
+}

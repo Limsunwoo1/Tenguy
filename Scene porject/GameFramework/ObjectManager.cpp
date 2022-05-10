@@ -45,10 +45,8 @@ void ObjectManager::Render(HDC Inhdc)
 
 		wchar_t buffer[100] = {};
 		swprintf_s(buffer, L"%d", testPobj->GetPlayerLIfe());
-
 		SelectObject(Inhdc, BLACK_);
 		TextOut(Inhdc, Player->GetPosition().x, Player->GetPosition().y, buffer, 1); // 플레이어의 라이프 표시
-
 	}
 	SelectObject(Inhdc, BACKGROUND_);
 }
@@ -67,6 +65,5 @@ CPlayer* ObjectManager:: Dynamic_Cast(CObject* InPlayer)
 {
 	testPobj = static_cast<CPlayer*>(Player);
 	return static_cast<CPlayer*>(InPlayer);
-
 }
 

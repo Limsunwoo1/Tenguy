@@ -45,26 +45,8 @@ void CObject::Update(float InDeltaTime)
 	}
 }
 
- /*bool CObject::InTerSect(const CObject* InPosition)
- {
-
-	 if (Position.x + (Scale.x * 0.5f) >= InPosition->Position.x - (InPosition->Scale.x * 0.5f) ||
-		 Position.x - (Scale.x * 0.5f) <= InPosition->Position.x + (InPosition->Scale.x * 0.5f))
-		 return true;
-
-	 if (Position.y + (Scale.x * 0.5f) >= InPosition->Position.y - (InPosition->Scale.x * 0.5f) ||
-		 Position.y - (Scale.x * 0.5f) <= InPosition->Position.y + (InPosition->Scale.x * 0.5f));
-		return true;
-
-
-	 return false;
- }*/
-
  void CObject::SetObjectType(EOBJ_TYPE objType)
  {
-	/* if (this ==  nullptr)
-		 return;*/
-
 	 ObjType = objType;
  }
 

@@ -12,6 +12,5 @@ public:
 	virtual void Update(float InDeltaTime) override;
 	void BoxRemove();
 	void Hit();
-
 };
 

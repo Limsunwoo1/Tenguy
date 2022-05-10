@@ -8,12 +8,10 @@ class CScene;
 class CSceneManager
 {
 	SINGLE(CSceneManager);
-
 private:
-	CScene*	 CurScene;     //잠시내림
+	CScene*	 CurScene;
 
     CObject* Bullet;
-    //CObject* Box;
     CObject* BoxAttack;
 
     POINT BoxAttackObjectPosition;
@@ -32,12 +30,8 @@ public:
 
 	void SetCurScene(CScene* InNewScene);
 	void AddObject(CObject* InObject);
-    //void AddBox(float InDeltaTime);
-
-    void BoxAttackObject(float InDeltaTime);
     bool Player_Hit();
     void SetVectorSize(std::vector<CObject*> InVC);
     std::vector<CObject*> Get_Object();
-
 };
 

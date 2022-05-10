@@ -37,12 +37,8 @@ void CStage2::Clear()
 {
 	delete Player;
 	Player = nullptr;
-	std::vector<CObject*> COB;
 	ObjectManager::GetInstance()->SetPlayer(Player);
-
-	SetVectorSize(COB);
-
-
+	ClearObject();
 }
 
 void CStage2::Update(float InDeltaTime)
@@ -86,7 +82,6 @@ void CStage2::Update(float InDeltaTime)
 	}
 
 	BoxAttackObject(InDeltaTime);
-
 }
 
 void CStage2::BoxAttackObject(float InDeltaTime)

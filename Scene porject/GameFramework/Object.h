@@ -32,7 +32,6 @@ public:
 
 	virtual void Update(float InDeltaTime);
 	virtual void Render(HDC InHdc);
-	//bool InTerSect(const CObject* InPosition);
 
 	void SetObjectType(EOBJ_TYPE objType);
 	EOBJ_TYPE GetObjectType();

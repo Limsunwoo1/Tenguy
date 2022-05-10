@@ -13,8 +13,6 @@ class ObjectManager
 {
 	SINGLE(ObjectManager);
 private:
-	//std::vector<CObject*> OBJvector;
-	//CArray<CObject*> BulletArray;
 	CObject* Player;
 	CPlayer* testPobj;
 public:
@@ -24,10 +22,5 @@ public:
 	void SetPlayer(CPlayer* InPlayer);
 	CPlayer* GetPlayer();
 	CPlayer* Dynamic_Cast(CObject* InPlayer);
-
-	//void AddObject(CObject* InObject);
-	//std::vector<CObject*>Get_Object();
-	//void SetVectorSize(std::vector<CObject*> InVC);
-
 };
 

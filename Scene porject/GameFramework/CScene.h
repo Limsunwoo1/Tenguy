@@ -23,6 +23,6 @@ public:
 	std::vector<CObject*>& Get_Object();
 	void Render(HDC InHdc);
 	bool Player_Hit();
-	
+	void ClearObject();
 };
 

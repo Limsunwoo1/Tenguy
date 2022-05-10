@@ -103,8 +103,12 @@
     <ClInclude Include="CStage2.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Box2.h" />
-    <ClInclude Include="Bullet2.h" />
+    <ClInclude Include="Box2.h">
+      <Filter>Object\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet2.h">
+      <Filter>Object\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIManager.cpp">
@@ -158,8 +162,12 @@
     <ClCompile Include="CStage2.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Box2.cpp" />
-    <ClCompile Include="Bullet2.cpp" />
+    <ClCompile Include="Box2.cpp">
+      <Filter>Object\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet2.cpp">
+      <Filter>Object\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework.rc">

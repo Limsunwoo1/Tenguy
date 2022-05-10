@@ -11,11 +11,7 @@ public:
 	virtual ~BulletObject();
 
 	virtual void Update(float InDeltaTime) override;
-	/*virtual void Render(HDC InHdc) override;*/
-
 	void BulletRemove();
-	//void BulletInterSet();
-
 };
 
 

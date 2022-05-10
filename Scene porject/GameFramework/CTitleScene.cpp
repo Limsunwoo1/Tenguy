@@ -23,10 +23,8 @@ CTitleScene::CTitleScene()
 
 CTitleScene::~CTitleScene()
 {
-	/*for (int i = 0;i < TiltleUI.size();i++)
-	{
-		delete TiltleUI[i];
-	}*/
+	delete TiltleUI[0];
+	delete TiltleUI[1];
 }
 
 void CTitleScene::Init()
@@ -36,9 +34,7 @@ void CTitleScene::Init()
 
 void CTitleScene::Clear()
 {	
-
 	TiltleUI.clear();
-
 	UIManager::GetInstance()->SetUI(TiltleUI);
 }
 
@@ -56,5 +52,4 @@ void CTitleScene::Update(float InDeltaTime)
 		CSceneManager::GetInstance()->SetCurScene(Stage2);
 		return;
 	}
-
 }

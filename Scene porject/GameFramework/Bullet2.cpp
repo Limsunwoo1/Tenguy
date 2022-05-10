@@ -17,14 +17,11 @@ Bullet2::~Bullet2()
 
 }
 
-
 void Bullet2::Update(float InDeltaTime)
 {
 	Position.y -= 2100 * InDeltaTime;
-	//BulletInterSet();
 	Bullet2Remove();
 }
-
 
 void Bullet2::Bullet2Remove()
 {
@@ -39,8 +36,6 @@ void Bullet2::Bullet2Remove()
 				InVecotr.erase(InVecotr.begin() + i);
 				CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 				InVecotr.clear();
-
-				//std::cout << "총알 삭제"  << std::endl;
 				break;
 			}
 		}
@@ -48,9 +43,5 @@ void Bullet2::Bullet2Remove()
 		{
 
 		}
-
-		// List 
-		// 배열 1 2 3 4(x) 5 
-		// 
 	}
 }

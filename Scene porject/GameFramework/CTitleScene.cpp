@@ -6,6 +6,7 @@
 #include "CSceneManager.h"
 #include "CStage1.h"
 #include "UI.h"
+#include "CStage2.h"
 
 CTitleScene::CTitleScene() 
 {
@@ -43,18 +44,17 @@ void CTitleScene::Clear()
 
 void CTitleScene::Update(float InDeltaTime)
 {
-	for (int i = 0; i < TiltleUI.size(); i++)
+	if (TiltleUI[0]->GetMouseOn() == true && TiltleUI[0]->GetMousePrs() == true)
 	{
-		if (TiltleUI[i]->GetMouseOn() == true && TiltleUI[i]->GetMousePrs() == true)
-		{
-			CScene* Stage1 = new CStage1();
-			CSceneManager::GetInstance()->SetCurScene(Stage1);
-			break;
-		}
-		else
-		{
-			continue;
-		}
+		CScene* Stage1 = new CStage1();
+		CSceneManager::GetInstance()->SetCurScene(Stage1);
+		return;
+	}
+	if (TiltleUI[1]->GetMouseOn() == true && TiltleUI[1]->GetMousePrs() == true)
+	{
+		CScene* Stage2 = new CStage2();
+		CSceneManager::GetInstance()->SetCurScene(Stage2);
+		return;
 	}
 
 }

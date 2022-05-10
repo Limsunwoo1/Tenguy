@@ -15,12 +15,12 @@ public:
 
 	// 구조에따라 필요할수도있고 필요없을수도 있다
 	virtual void Update(float InDeltaTime) ;
-	void SetVectorSize(std::vector<CObject*> InVC);
+	void SetVectorSize(std::vector<CObject*>& InVC);
 	void AddObject(CObject* InObject);
 	void AddBox(float InDeltaTime);
 
 	virtual void BoxAttackObject(float InDeltaTime) {};
-	std::vector<CObject*> Get_Object();
+	std::vector<CObject*>& Get_Object();
 	void Render(HDC InHdc);
 	bool Player_Hit();
 	

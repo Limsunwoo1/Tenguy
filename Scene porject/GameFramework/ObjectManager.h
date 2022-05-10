@@ -22,7 +22,7 @@ public:
 	void Update(float InDeltaTime);
 	void Render(HDC Inhdc);
 	void SetPlayer(CPlayer* InPlayer);
-	CObject* GetPlayer();
+	CPlayer* GetPlayer();
 	CPlayer* Dynamic_Cast(CObject* InPlayer);
 
 	//void AddObject(CObject* InObject);

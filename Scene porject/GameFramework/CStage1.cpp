@@ -7,6 +7,8 @@
 #include "CSceneManager.h"
 #include "CTitleScene.h"
 #include <iostream>
+#include "Box2.h"
+#include "Struct.h"
 
 using namespace std;
 
@@ -23,7 +25,7 @@ CStage1::~CStage1()
 
 void CStage1::Init()
 {
-	Player = new CPlayer();
+	Player = new CPlayer(/*Vector2D(500,600), Vector2D(50, 50)*/);
 	Player->SetObjectType(EOBJ_TYPE::Player);
 	ObjectManager::GetInstance()->SetPlayer(Player);
 	/*float	BoxSpawnCoolTimeMax = 0.3f;
@@ -42,7 +44,10 @@ void CStage1::Clear()
 	Player = nullptr;
 	std::vector<CObject*> COB;
 	ObjectManager::GetInstance()->SetPlayer(Player);
+
 	SetVectorSize(COB);
+	
+	
 }
 
 void CStage1::Update(float InDeltaTime)
@@ -64,7 +69,7 @@ void CStage1::Update(float InDeltaTime)
 	{
 		if (currdelta > 1.0f)
 		{
-			//InPlayer->SetPlayerLIfe(InPlayer ->GetPlayerLIfe()-1);
+			InPlayer->SetPlayerLIfe(InPlayer ->GetPlayerLIfe()-1);
 			currdelta = 0.f;
 		}
 	}

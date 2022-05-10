@@ -142,6 +142,7 @@
     <ClInclude Include="Array.h" />
     <ClInclude Include="Box2.h" />
     <ClInclude Include="BoxObject.h" />
+    <ClInclude Include="Bullet2.h" />
     <ClInclude Include="BulletObject.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CScene.h" />
@@ -168,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="Box2.cpp" />
     <ClCompile Include="BoxObject.cpp" />
+    <ClCompile Include="Bullet2.cpp" />
     <ClCompile Include="BulletObject.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CScene.cpp" />

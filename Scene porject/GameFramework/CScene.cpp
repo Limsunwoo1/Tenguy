@@ -6,6 +6,7 @@
 #include "BoxObject.h"
 #include <random>
 #include <iostream>
+#include "Box2.h"
 using namespace std;
 
 HBRUSH BLACK = CreateSolidBrush(RGB(0, 0, 0));
@@ -50,19 +51,34 @@ void CScene::AddObject(CObject* InObject)
 
 void CScene::AddBox(float InDeltaTime)
 {
+	if (ObjectManager::GetInstance()->GetPlayer() == nullptr)
+		return;
+
 	float rand = (float)Dis(gen);
-	Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
-	Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
-	Box->SetDeltaTime(InDeltaTime);
-	AddObject(Box);
+
+	if (ObjectManager::GetInstance()->GetPlayer()->GetStageCode() == 1)
+	{
+		Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
+		Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
+		Box->SetDeltaTime(InDeltaTime);
+		AddObject(Box);
+	}
+
+	if (ObjectManager::GetInstance()->GetPlayer()->GetStageCode() == 2)
+	{
+		Box = new Box2(Vector2D{ (float)dis(gen) ,(float)0 }, Vector2D{ rand ,rand }, 600);
+		Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
+		Box->SetDeltaTime(InDeltaTime);
+		AddObject(Box);
+	}
 }
 
-std::vector<CObject*> CScene::Get_Object()
+std::vector<CObject*>& CScene::Get_Object()
 {
 	return OBJvector;
 }
 
-void CScene::SetVectorSize(std::vector<CObject*> InVC)
+void CScene::SetVectorSize(std::vector<CObject*>& InVC)
 {
 	OBJvector.swap(InVC);
 }

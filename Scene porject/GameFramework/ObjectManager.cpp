@@ -58,9 +58,9 @@ void ObjectManager::SetPlayer(CPlayer* InPayer)
 	Player = InPayer;
 }
 
-CObject* ObjectManager::GetPlayer()
+CPlayer* ObjectManager::GetPlayer()
 {
-	return Player;
+	return testPobj = static_cast<CPlayer*>(Player);;
 }
 
 CPlayer* ObjectManager:: Dynamic_Cast(CObject* InPlayer)

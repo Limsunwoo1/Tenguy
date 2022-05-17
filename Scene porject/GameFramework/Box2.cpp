@@ -40,8 +40,6 @@ void Box2::BoxRemove()
 			InVecotr.erase(InVecotr.begin() + i);
 			CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 			InVecotr.clear();
-			//std::cout << "박스 삭제" << std::endl;
-			//break;
 		}
 	}
 }

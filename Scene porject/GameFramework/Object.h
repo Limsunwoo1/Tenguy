@@ -1,6 +1,8 @@
 #pragma once
 #include "framework.h"
 
+class CTexture;
+
 enum class EOBJ_TYPE {
 	RECTANGLE,
 	ELLIPSE,
@@ -9,12 +11,24 @@ enum class EOBJ_TYPE {
 	Max,
 };
 
+enum class OBJ_LAYER : char { // LAYER : char 모르겠음
+	BACKGROUND	= 0,
+	BULLET		= 6,
+	MONSTER		= 12,
+	PLAYER		= 16,
+	UI			= 32,
+	MAX,
+};
+
 class CObject
 {
 protected:
 	Vector2D		Position;
 	Vector2D		Scale;
 	EOBJ_TYPE		ObjType;
+	OBJ_LAYER		ObjLayer;
+
+	CTexture*		Texture;
 	
 	float			ObjDeletaTime = 0.f;
 public:
@@ -38,5 +52,7 @@ public:
 
 	void SetDeltaTime(float InDeltaTime);
 	float GetDeltaTime();	
+
+	void SetTexture(CTexture* InTexture);
 };
 

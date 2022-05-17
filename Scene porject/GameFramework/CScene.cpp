@@ -36,7 +36,7 @@ void CScene::Init()
 
 void CScene::Clear()
 {
-
+	ClearObject();
 }
 void CScene::Update(float InDeltaTime)
 {
@@ -126,10 +126,8 @@ bool CScene::Player_Hit()
 void CScene::ClearObject()
 {
 	vector<CObject*>::iterator iter;
-	int cnt = 0;
 	for (iter = OBJvector.begin();iter != OBJvector.end();iter++)
 	{
-		delete OBJvector[cnt];
-		cnt++;
+		delete* iter;
 	}
 }

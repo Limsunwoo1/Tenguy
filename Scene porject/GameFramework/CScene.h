@@ -4,8 +4,7 @@
 class CScene
 {
 private:
-	 std::vector<CObject*> OBJvector;
-	 CObject* Box;
+	std::vector<CObject*> OBJvector[(int)OBJ_LAYER::MAX];
 public:
 	CScene();
 	virtual ~CScene();

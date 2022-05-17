@@ -42,8 +42,6 @@ void BoxObject::BoxRemove()
 			InVecotr.erase(InVecotr.begin() + i);
 			CSceneManager::GetInstance()->SetVectorSize(InVecotr);
 			InVecotr.clear();
-			//std::cout << "박스 삭제" << std::endl;
-			//break;
 		}
 	}
 }
@@ -57,7 +55,6 @@ void BoxObject::Hit()
 
 		if (InVecotr[i]->GetObjectType() != EOBJ_TYPE::ELLIPSE)
 			continue;
-		//if (InVecotr[i]->GetObjectType() != EOBJ_TYPE::Bullet)
 			
 		if (!CheckCollision(Position, Scale, InVecotr[i]->GetPosition(), InVecotr[i]->GetScale()))
 				continue;

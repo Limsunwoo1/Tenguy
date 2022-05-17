@@ -29,6 +29,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{36929eda-c29c-40e0-a0ac-10eadff5999c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Resource">
+      <UniqueIdentifier>{029eb342-55ea-4791-bd01-6441ab003521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array.h">
@@ -109,6 +112,10 @@
     <ClInclude Include="Bullet2.h">
       <Filter>Object\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>Scene\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIManager.cpp">
@@ -168,6 +175,10 @@
     <ClCompile Include="Bullet2.cpp">
       <Filter>Object\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>Scene\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework.rc">

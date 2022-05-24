@@ -20,8 +20,9 @@ void CResourceManager::Init(HINSTANCE InHInst, HDC InHdc)
 	Hdc = InHdc;
 
 
-	LoadTexture("Player",L"Texture/ bmp");
-	LoadTexture("Bullet", L"Texture/ bmp");
+	LoadTexture("Player",L"Texture/BubbleBobblePart2Sheet1_.bmp");
+	LoadTexture("Bullet", L"Texture/BubbleBobblePart2Sheet12.bmp");
+	LoadTexture("MONSTER", L"Texture/Player1_Face.bmp");
 }
 
 CTexture* CResourceManager::LoadTexture(const string& InName, const wstring& InFilePath)

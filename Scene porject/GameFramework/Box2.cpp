@@ -28,7 +28,7 @@ void Box2::Update(float InDeltaTime)
 
 void Box2::BoxRemove()
 {
-	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
+	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
@@ -37,9 +37,7 @@ void Box2::BoxRemove()
 
 		if (InVecotr[i]->GetPosition().y >= 980)
 		{
-			InVecotr.erase(InVecotr.begin() + i);
-			CSceneManager::GetInstance()->SetVectorSize(InVecotr);
-			InVecotr.clear();
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
 		}
 	}
 }

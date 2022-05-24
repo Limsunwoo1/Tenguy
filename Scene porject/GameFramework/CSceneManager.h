@@ -30,8 +30,7 @@ public:
 
 	void SetCurScene(CScene* InNewScene);
 	void AddObject(CObject* InObject);
-    bool Player_Hit();
-    void SetVectorSize(std::vector<CObject*> InVC);
-    std::vector<CObject*> Get_Object();
+    void SetVectorSize(OBJ_LAYER InLayer, int count);
+    const std::vector<CObject*>& Get_Object(OBJ_LAYER InLayer);
 };
 

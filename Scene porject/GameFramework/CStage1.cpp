@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Box2.h"
 #include "Struct.h"
+#include "ResourceManager.h"
 
 using namespace std;
 
@@ -27,6 +28,9 @@ void CStage1::Init()
 {
 	Player = new CPlayer(/*Vector2D(500,600), Vector2D(50, 50)*/);
 	Player->SetObjectType(EOBJ_TYPE::Player);
+	Player->SetObjectLayer(OBJ_LAYER::PLAYER);
+	Player->SetTexture(CResourceManager::GetInstance()->FindTexture("Player"));
+	Player->SetStageCode(1);
 	ObjectManager::GetInstance()->SetPlayer(Player);
 	/*float	BoxSpawnCoolTimeMax = 0.3f;
 	float	BoxAttackObjectSpawnCoolTimeMax = 0.1f;*/
@@ -43,15 +47,13 @@ void CStage1::Clear()
 	delete Player;
 	Player = nullptr;
 	ObjectManager::GetInstance()->SetPlayer(Player);
-	ClearObject();
+	CScene::ClearObject();
 }
 
 void CStage1::Update(float InDeltaTime)
 {
-	for (int i = 0; i < Get_Object().size(); ++i)
-	{
-		Get_Object()[i]->Update(InDeltaTime);
-	}
+	CScene::Update(InDeltaTime);
+
 	static CPlayer* InPlayer;
 	static float currdelta;
 
@@ -90,25 +92,26 @@ void CStage1::Update(float InDeltaTime)
 
 void CStage1::BoxAttackObject(float InDeltaTime)
 {
-	for (int i = 0; i < Get_Object().size(); ++i)
-	{
-		if (Get_Object()[i]->GetObjectType() != EOBJ_TYPE::RECTANGLE)
-			continue;
+	std::vector<CObject*> OBJvector = Get_Object(OBJ_LAYER::MONSTER);
 
-		BoxAttackObjectSpawnCoolTimeCurrent = Get_Object()[i]->GetDeltaTime();
+	for (int i = 0; i < OBJvector.size(); ++i)
+	{
+		BoxAttackObjectSpawnCoolTimeCurrent = OBJvector[i]->GetDeltaTime();
 		BoxAttackObjectSpawnCoolTimeCurrent += InDeltaTime;
 
 		if (BoxAttackObjectSpawnCoolTimeCurrent < BoxAttackObjectSpawnCoolTimeMax)
 		{
-			Get_Object()[i]->SetDeltaTime(BoxAttackObjectSpawnCoolTimeCurrent);
+			OBJvector[i]->SetDeltaTime(BoxAttackObjectSpawnCoolTimeCurrent);
 			continue;
 		}
 
 		if (BoxAttackObjectSpawnCoolTimeCurrent > BoxAttackObjectSpawnCoolTimeMax)
 		{
-			CObject* BoxAttack = new BoxObject(Vector2D{ Get_Object()[i]->GetPosition().x, Get_Object()[i]->GetPosition().y }, Vector2D{ 20,20 }, 1200);
+			CObject* BoxAttack = new BoxObject(Vector2D{ OBJvector[i]->GetPosition().x, OBJvector[i]->GetPosition().y }, Vector2D{ 20,20 }, 1200);
 			BoxAttack->SetObjectType(EOBJ_TYPE::Bullet);
-			Get_Object()[i]->SetDeltaTime(0.f);
+			BoxAttack->SetObjectLayer(OBJ_LAYER::MONSTER);
+			BoxAttack->SetTexture(CResourceManager::GetInstance()->FindTexture("Bullet"));
+			OBJvector[i]->SetDeltaTime(0.f);
 
 			AddObject(BoxAttack);
 		}

@@ -7,6 +7,7 @@
 #include <random>
 #include <iostream>
 #include "Box2.h"
+#include "ResourceManager.h"
 using namespace std;
 
 HBRUSH BLACK = CreateSolidBrush(RGB(0, 0, 0));
@@ -31,7 +32,9 @@ CScene::~CScene()
 
 void CScene::Init()
 {
-	
+	CObject* Backgruond = new CObject(Vector2D((float)0, (float)0), Vector2D((float)980, (float)680));
+	Backgruond->SetObjectType(EOBJ_TYPE::BackGrund);
+	Backgruond->SetObjectLayer(OBJ_LAYER::BACKGROUND);
 }
 
 void CScene::Clear()
@@ -40,13 +43,28 @@ void CScene::Clear()
 }
 void CScene::Update(float InDeltaTime)
 {
-	
+	for (int layer = (int)OBJ_LAYER::BACKGROUND; layer < (int)OBJ_LAYER::MAX; ++layer)
+	{
+		for (int i = 0; i < OBJvector[layer].size(); ++i)
+		{
+			OBJvector[layer][i]->Update(InDeltaTime);
+		}
+	}
 }
 
 
 void CScene::AddObject(CObject* InObject)
 {
-	OBJvector.push_back(InObject);
+	if (InObject->GetObjectType() == EOBJ_TYPE::Player)
+		OBJvector[(int)OBJ_LAYER::PLAYER].push_back(InObject);
+	else if (InObject->GetObjectType() == EOBJ_TYPE::BackGrund)
+		OBJvector[(int)OBJ_LAYER::BACKGROUND].push_back(InObject);
+	else if (InObject->GetObjectType() == EOBJ_TYPE::RECTANGLE)
+		OBJvector[(int)OBJ_LAYER::MONSTER].push_back(InObject);
+	else if (InObject->GetObjectType() == EOBJ_TYPE::Bullet)
+		OBJvector[(int)OBJ_LAYER::MONSTER].push_back(InObject);
+	else if (InObject->GetObjectType() == EOBJ_TYPE::ELLIPSE)
+		OBJvector[(int)OBJ_LAYER::BULLET].push_back(InObject);
 }
 
 void CScene::AddBox(float InDeltaTime)
@@ -58,67 +76,61 @@ void CScene::AddBox(float InDeltaTime)
 
 	if (ObjectManager::GetInstance()->GetPlayer()->GetStageCode() == 1)
 	{
-		Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
+		CObject* Box = new BoxObject(Vector2D{ (float)980 ,(float)dis(gen) }, Vector2D{ rand ,rand }, 600);
 		Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
+		Box->SetObjectLayer(OBJ_LAYER::MONSTER);
 		Box->SetDeltaTime(InDeltaTime);
+		Box->SetTexture(CResourceManager::GetInstance()->FindTexture("MONSTER"));
 		AddObject(Box);
 	}
 
 	if (ObjectManager::GetInstance()->GetPlayer()->GetStageCode() == 2)
 	{
-		Box = new Box2(Vector2D{ (float)dis(gen) ,(float)0 }, Vector2D{ rand ,rand }, 600);
+		CObject* Box = new Box2(Vector2D{ (float)dis(gen) ,(float)0 }, Vector2D{ rand ,rand }, 600);
 		Box->SetObjectType(EOBJ_TYPE::RECTANGLE);
+		Box->SetObjectLayer(OBJ_LAYER::MONSTER);
 		Box->SetDeltaTime(InDeltaTime);
+		Box->SetTexture(CResourceManager::GetInstance()->FindTexture("MONSTER"));
 		AddObject(Box);
 	}
 }
 
-std::vector<CObject*>& CScene::Get_Object()
+const std::vector<CObject*>& CScene::Get_Object(OBJ_LAYER InLayer)
 {
-	return OBJvector;
+	return OBJvector[(int)InLayer];
 }
 
-void CScene::SetVectorSize(std::vector<CObject*>& InVC)
+void CScene::SetVectorSize(OBJ_LAYER InLayer, int count)
 {
-	OBJvector.swap(InVC);
+	OBJvector[(int)InLayer].erase(OBJvector[(int)InLayer].begin()+count);
 }
 
 void CScene::Render(HDC InHdc)
 {
-	for (int i = 0; i < OBJvector.size(); ++i)
+	for (int layer = (int)OBJ_LAYER::BACKGROUND; layer < (int)OBJ_LAYER::MAX; ++layer)
 	{
-		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE)
+		for (int i = 0; i < OBJvector[layer].size(); ++i)
 		{
-			SelectObject(InHdc, BLACK);
+			OBJvector[layer][i]->Render(InHdc);
 		}
-		else if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
-		{
-			SelectObject(InHdc, RED);
-		}
-		else if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::Bullet)
-		{
-			SelectObject(InHdc, BLACK);
-		}
-		OBJvector[i]->Render(InHdc);
+		SelectObject(InHdc, BACKGROUND);
 	}
-	SelectObject(InHdc, BACKGROUND);
  }
 
 bool CScene::Player_Hit()
 {
 	CObject* Player = ObjectManager::GetInstance()->GetPlayer();
 
-	for (int i = 0;i < OBJvector.size(); ++i)
-	{
-		if (OBJvector[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE || OBJvector[i]->GetObjectType() == EOBJ_TYPE::Bullet)
-		{
-			if (!CheckCollision(Player->GetPosition(), Player->GetScale(), OBJvector[i]->GetPosition(), OBJvector[i]->GetScale()))
-				continue;
 
-			delete* (OBJvector.begin() + i);
-			OBJvector.erase(OBJvector.begin() + i);
-			return true;
-		}
+	for (int i = 0;i < OBJvector[(int)OBJ_LAYER::MONSTER].size(); ++i)
+	{
+		if (!CheckCollision(Player->GetPosition(), Player->GetScale(), OBJvector[(int)OBJ_LAYER::MONSTER][i]->GetPosition(),
+			OBJvector[(int)OBJ_LAYER::MONSTER][i]->GetScale()))
+			continue;
+
+		delete* (OBJvector[(int)OBJ_LAYER::MONSTER].begin() + i);
+		OBJvector[(int)OBJ_LAYER::MONSTER].erase(OBJvector[(int)OBJ_LAYER::MONSTER].begin() + i);
+		return true;
 	}
 	return false;
 }
@@ -126,8 +138,11 @@ bool CScene::Player_Hit()
 void CScene::ClearObject()
 {
 	vector<CObject*>::iterator iter;
-	for (iter = OBJvector.begin();iter != OBJvector.end();iter++)
+	for (int layer = 0; layer < (int)OBJ_LAYER::MAX; ++layer)
 	{
-		delete* iter;
+		for (iter = OBJvector[layer].begin();iter != OBJvector[layer].end();iter++)
+		{
+			delete *iter;
+		}
 	}
 }

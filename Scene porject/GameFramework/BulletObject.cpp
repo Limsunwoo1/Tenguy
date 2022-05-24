@@ -26,17 +26,15 @@ void BulletObject::Update(float InDeltaTime)
 
 void BulletObject::BulletRemove()
 {
-	for (int i = 0; i < CSceneManager::GetInstance()->Get_Object().size(); ++i)
+	for (int i = 0; i < CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER).size(); ++i)
 	{
-		std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
+		std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
 		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
 		{
 			if (InVecotr[i]->GetPosition().x >= 980)
 			{
-				InVecotr.erase(InVecotr.begin() + i);
-				CSceneManager::GetInstance()->SetVectorSize(InVecotr);
-				InVecotr.clear();
+				CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
 				break;
 			}
 		}

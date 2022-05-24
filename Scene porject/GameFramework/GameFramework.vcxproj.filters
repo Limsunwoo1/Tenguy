@@ -115,7 +115,9 @@
     <ClInclude Include="CTexture.h">
       <Filter>Scene\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UIManager.cpp">
@@ -178,7 +180,9 @@
     <ClCompile Include="CTexture.cpp">
       <Filter>Scene\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameFramework.rc">

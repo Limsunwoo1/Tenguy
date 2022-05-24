@@ -51,31 +51,12 @@ void CSceneManager::AddObject(CObject* InObject)
 	CurScene->AddObject(InObject);
 }
 
-std::vector<CObject*> CSceneManager::Get_Object()
+const std::vector<CObject*>& CSceneManager::Get_Object(OBJ_LAYER InLayer)
 {
-	return CurScene->Get_Object();
+	return CurScene->Get_Object(InLayer);
 }
 
-void CSceneManager::SetVectorSize(std::vector<CObject*> InVC)
+void CSceneManager::SetVectorSize(OBJ_LAYER InLayer, int count)
 {
-	CurScene->SetVectorSize(InVC);
-}
-
-bool CSceneManager::Player_Hit()
-{
-	CObject* Player = ObjectManager::GetInstance()->GetPlayer();
-
-	for (int i = 0;i < CurScene->Get_Object().size(); ++i)
-	{
-		if (CurScene->Get_Object()[i]->GetObjectType() == EOBJ_TYPE::RECTANGLE || CurScene->Get_Object()[i]->GetObjectType() == EOBJ_TYPE::Bullet)
-		{
-			if (!CheckCollision(Player->GetPosition(), Player->GetScale(), CurScene->Get_Object()[i]->GetPosition(), CurScene->Get_Object()[i]->GetScale()))
-				continue;
-
-			CurScene->Get_Object().erase(CurScene->Get_Object().begin() + i);
-			delete* (CurScene->Get_Object().begin() + i);
-			return true;
-		}
-	}
-	return false;
+	CurScene->SetVectorSize(InLayer, count);
 }

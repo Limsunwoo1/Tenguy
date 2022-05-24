@@ -25,16 +25,16 @@ void Bullet2::Update(float InDeltaTime)
 
 void Bullet2::Bullet2Remove()
 {
-	for (int i = 0; i < CSceneManager::GetInstance()->Get_Object().size(); ++i)
+	for (int i = 0; i < CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER).size(); ++i)
 	{
-		std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
+		std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
 		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
 		{
 			if (InVecotr[i]->GetPosition().x >= 980)
 			{
 				InVecotr.erase(InVecotr.begin() + i);
-				CSceneManager::GetInstance()->SetVectorSize(InVecotr);
+				CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
 				InVecotr.clear();
 				break;
 			}

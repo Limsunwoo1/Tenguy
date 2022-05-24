@@ -4,7 +4,7 @@
 #include "BulletObject.h"
 #include "CSceneManager.h"
 #include "Bullet2.h"
-
+#include "ResourceManager.h"
 CPlayer::CPlayer() : CObject(Vector2D{ 100, 100 }, Vector2D{ 50, 50 })
 {
 	this->life = 3;
@@ -39,6 +39,8 @@ void CPlayer::Update(float InDeltaTime)
 
 				CObject* Bullet = new BulletObject(Vector2D{ PST.x ,PST.y }, Vector2D{ 20 ,20 });
 				Bullet->SetObjectType(EOBJ_TYPE::ELLIPSE);
+				Bullet->SetObjectLayer(OBJ_LAYER::BULLET);
+				Bullet->SetTexture(CResourceManager::GetInstance()->FindTexture("Bullet"));
 				CSceneManager::GetInstance()->AddObject(Bullet);
 
 				BulletSpawnCollTimeCurrent = 0.f;
@@ -56,6 +58,8 @@ void CPlayer::Update(float InDeltaTime)
 
 				CObject* Bullet = new Bullet2(Vector2D{ PST.x ,PST.y }, Vector2D{ 20 ,20 });
 				Bullet->SetObjectType(EOBJ_TYPE::ELLIPSE);
+				Bullet->SetObjectLayer(OBJ_LAYER::BULLET);
+				//Bullet->SetTexture(CResourceManager::GetInstance()->FindTexture("Bullet"));
 				CSceneManager::GetInstance()->AddObject(Bullet);
 
 				BulletSpawnCollTimeCurrent = 0.f;

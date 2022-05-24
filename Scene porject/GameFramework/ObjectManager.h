@@ -5,7 +5,7 @@
 #include "Player.h"
 #include <vector>
 #define USER = 0;
-#define BULLET = 1;
+#define DP_BULLET = 1;
 #define HURDLE = 2;
 
 

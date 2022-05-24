@@ -8,6 +8,8 @@ enum class EOBJ_TYPE {
 	ELLIPSE,
 	Player,
 	Bullet,
+	BackGrund,
+	UI,
 	Max,
 };
 
@@ -54,5 +56,8 @@ public:
 	float GetDeltaTime();	
 
 	void SetTexture(CTexture* InTexture);
+
+	OBJ_LAYER GetObjectLayer();
+	void SetObjectLayer(OBJ_LAYER InOBJ_Layer);
 };
 

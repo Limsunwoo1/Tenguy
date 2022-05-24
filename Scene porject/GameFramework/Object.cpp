@@ -24,6 +24,15 @@ void CObject::SetTexture(CTexture* InTexture)
 	Texture = InTexture;
 }
 
+OBJ_LAYER CObject::GetObjectLayer()
+{
+	return ObjLayer;
+}
+void CObject::SetObjectLayer(OBJ_LAYER InOBJ_Laye)
+{
+	ObjLayer = InOBJ_Laye;
+}
+
 void CObject::Update(float InDeltaTime)
 {
 
@@ -33,7 +42,62 @@ void CObject::Update(float InDeltaTime)
 {
 	 if (Texture)
 	 {
-
+		 if (ObjType == EOBJ_TYPE::Player)
+		 {
+			 BitBlt(InHdc,
+				 Position.x - (Scale.x * 0.5f),
+				 Position.y - (Scale.y * 0.5f),
+				 //Scale.x,
+				 //Scale.y,
+				 Texture->GetWidth(),
+				 Texture->GetHeight(),
+				 Texture->GetHdc(),
+				 0,
+				 0,
+				 SRCCOPY);
+		 }
+		 else if (ObjType == EOBJ_TYPE::ELLIPSE)
+		 {
+			 BitBlt(InHdc,
+				 Position.x - (Scale.x * 0.5f),
+				 Position.y - (Scale.y * 0.5f),
+				 //Scale.x,
+				 //Scale.y,
+				 Texture->GetWidth(),
+				 Texture->GetHeight(),
+				 Texture->GetHdc(),
+				 0,
+				 0,
+				 SRCCOPY);
+		 }
+		 else if ( ObjType == EOBJ_TYPE::Bullet)
+		 {
+			 BitBlt(InHdc,
+				 Position.x - (Scale.x * 0.5f),
+				 Position.y - (Scale.y * 0.5f),
+				 //Scale.x,
+				 //Scale.y,
+				 Texture->GetWidth(),
+				 Texture->GetHeight(),
+				 Texture->GetHdc(),
+				 0,
+				 0,
+				 SRCCOPY);
+		 }
+		 else if (ObjType == EOBJ_TYPE::RECTANGLE)
+		 {
+			 BitBlt(InHdc,
+				 Position.x - (Scale.x * 0.5f),
+				 Position.y - (Scale.y * 0.5f),
+				 //Scale.x,
+				 //Scale.y,
+				 Texture->GetWidth(),
+				 Texture->GetHeight(),
+				 Texture->GetHdc(),
+				 0,
+				 0,
+				 SRCCOPY);
+		 }
 	 }
 	 else
 	 {
@@ -52,6 +116,14 @@ void CObject::Update(float InDeltaTime)
 				 Position.y - (Scale.y * 0.5f),
 				 Position.x + (Scale.x * 0.5f),
 				 Position.y + (Scale.y * 0.5f));
+		 }
+		 if (ObjType == EOBJ_TYPE::BackGrund)
+		 {
+			 Rectangle(InHdc,
+				 Position.x,
+				 Position.y ,
+				 Scale.x,
+				 Scale.y);
 		 }
 	 }
 }

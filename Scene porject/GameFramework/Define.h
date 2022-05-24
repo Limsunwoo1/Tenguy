@@ -15,4 +15,3 @@ public: \
 
 #define KEY_STATE(InKey) CKeyManager::GetInstance()->GetKeyState(InKey)
 #define MOUSE_POS CKeyManager::GetInstance()->GetMousePos();
-

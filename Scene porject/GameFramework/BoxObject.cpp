@@ -30,7 +30,7 @@ void BoxObject::Update(float InDeltaTime)
 
 void BoxObject::BoxRemove()
 {
-	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
+	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
@@ -39,16 +39,14 @@ void BoxObject::BoxRemove()
 
 		if (InVecotr[i]->GetPosition().x <= 0)
 		{
-			InVecotr.erase(InVecotr.begin() + i);
-			CSceneManager::GetInstance()->SetVectorSize(InVecotr);
-			InVecotr.clear();
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
 		}
 	}
 }
 
 void BoxObject::Hit()
 {
-	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object();
+	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
@@ -59,12 +57,10 @@ void BoxObject::Hit()
 		if (!CheckCollision(Position, Scale, InVecotr[i]->GetPosition(), InVecotr[i]->GetScale()))
 				continue;
 
-		InVecotr.erase(InVecotr.begin() + i);
-		CSceneManager::GetInstance()->SetVectorSize(InVecotr);
-		InVecotr.clear();
+		CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
 
  		int cnt = 0;
-		std::vector<CObject*> InVecotr2 = CSceneManager::GetInstance()->Get_Object();
+		std::vector<CObject*> InVecotr2 = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
 		for (int i = 0; i < InVecotr2.size(); ++i)
 		{
@@ -76,7 +72,7 @@ void BoxObject::Hit()
 		}
 		//std::cout << "Ãæµ¹" << std::endl;
 		InVecotr2.erase(InVecotr2.begin() + cnt);
-		CSceneManager::GetInstance()->SetVectorSize(InVecotr2);
+		CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
 		InVecotr2.clear();
 	}
 }

@@ -21,29 +21,14 @@ private:
 	HWND Hwnd;
 	HINSTANCE HInstance;
 
-	/*CArray<CObject*> ObjectArray;
-	CObject* Player;
-	CObject* Bullet;
-	CObject* Box;
-	CObject* BoxAttack;
-
-	POINT BoxAttackObjectPosition;
-
-	float	BoxSpawnCoolTimeMax;
-	float	BoxSpawnCoolTimeCurrent;
-
-	float	BoxAttackObjectSpawnCoolTimeMax;
-	float	BoxAttackObjectSpawnCoolTimeCurrent;
-	float	BoxAttackObjectSpawnTimeCurrent;*/
-
+	
 public:
 	void Init(HWND InHwnd, HINSTANCE InHInstance);
 	void Logic();
 
 	virtual void Update(float InDeltaTime);
 	void Render();
-	/*void AddBox(float InDeltaTime);
-	void BoxAttackObject(float InDeltaTime);*/
+	
 
 	HWND GetHwnd() {return Hwnd;}
 };

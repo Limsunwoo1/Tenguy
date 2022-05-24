@@ -6,6 +6,7 @@
 #include "Player.h"
 #include <iostream>
 #include <windows.h>
+#include "ResourceManager.h"
 //std::random_device rd;
 //std::mt19937 gen(rd());
 //std::uniform_int_distribution<int> dis(0, 980);
@@ -53,6 +54,7 @@ void CMainGame::Init(HWND InHwnd, HINSTANCE InHInstance)
 	CKeyManager::GetInstance()->Init();
 	CSceneManager::GetInstance()->Init();
 	UIManager::GetInstance()->Init();
+	CResourceManager::GetInstance()->Init(HInstance, Hdc);
 	//
 
 	// 더블버퍼링

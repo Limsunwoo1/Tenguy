@@ -11,6 +11,7 @@ public:
 
 	virtual void Update(float InDeltaTime) override;
 	void BoxRemove();
-	void Hit();
+	void MonsterHit();
+	void MonsterSkill_Hit();
 };
 

@@ -45,6 +45,7 @@ void CStage2::Clear()
 void CStage2::Update(float InDeltaTime)
 {
 	CScene::Update(InDeltaTime);
+
 	static CPlayer* InPlayer;
 	static float currdelta;
 

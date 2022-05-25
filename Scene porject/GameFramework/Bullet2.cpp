@@ -29,7 +29,7 @@ void Bullet2::Bullet2Remove()
 	{
 		std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
-		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
+		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::Bullet)
 		{
 			if (InVecotr[i]->GetPosition().x >= 980)
 			{

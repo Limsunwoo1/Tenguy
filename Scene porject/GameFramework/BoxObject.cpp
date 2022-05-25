@@ -25,54 +25,95 @@ void BoxObject::Update(float InDeltaTime)
 {
 	Position.x -= speed * InDeltaTime;
 	BoxRemove();
-	Hit();
+	MonsterSkill_Hit();
+	MonsterHit();
 }
 
 void BoxObject::BoxRemove()
 {
-	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
+	std::vector<CObject*> Monster = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
 
-	for (int i = 0; i < InVecotr.size(); ++i)
+	for (int i = 0; i < Monster.size(); ++i)
 	{
-		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
-			continue;
-
-		if (InVecotr[i]->GetPosition().x <= 0)
+		if (Monster[i]->GetPosition().x <= 0)
 		{
+			//std::cout << "박스 삭제" << std::endl;
 			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
+		}
+	}
+
+	std::vector<CObject*> MonsterSkill = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTERSKILL);
+	for (int i = 0; i < MonsterSkill.size(); ++i)
+	{
+		if (MonsterSkill[i]->GetPosition().x <= 0)
+		{
+			//std::cout << "박스 삭제" << std::endl;
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTERSKILL, i);
 		}
 	}
 }
 
-void BoxObject::Hit()
+void BoxObject::MonsterHit()
 {
 	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
-
+	std::vector<CObject*> Player = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::PLAYER);
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
+		for (int j = 0; i < Player.size(); ++i)
+		{
+			if (!CheckCollision(InVecotr[i]->GetPosition(), InVecotr[i]->GetScale(), Player[j]->GetPosition(), Player[j]->GetScale()))
+				continue;
+			std::cout << Player.size() << std::endl;
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
+			break;
+			//std::cout << "충돌" << std::endl;
+		}
+	}
 
-		if (InVecotr[i]->GetObjectType() != EOBJ_TYPE::ELLIPSE)
-			continue;
-			
-		if (!CheckCollision(Position, Scale, InVecotr[i]->GetPosition(), InVecotr[i]->GetScale()))
+	InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
+	std::vector<CObject*> Bullet = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::BULLET);
+	for (int i = 0; i < InVecotr.size(); ++i)
+	{
+		for (int j = 0; i < Bullet.size(); ++i)
+		{
+			if (!CheckCollision(InVecotr[i]->GetPosition(), InVecotr[i]->GetScale(), Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
 				continue;
 
-		CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
-
- 		int cnt = 0;
-		std::vector<CObject*> InVecotr2 = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
-
-		for (int i = 0; i < InVecotr2.size(); ++i)
-		{
-			if (Position.x == InVecotr2[i]->GetPosition().x && Position.y == InVecotr2[i]->GetPosition().y && InVecotr2[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
-			{
-				cnt = i;
-				break;
-			}
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::BULLET, j);
+			break;
+			//std::cout << "충돌" << std::endl;
 		}
-		//std::cout << "충돌" << std::endl;
-		InVecotr2.erase(InVecotr2.begin() + cnt);
-		CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTER, i);
-		InVecotr2.clear();
+	}
+}
+
+void BoxObject::MonsterSkill_Hit()
+{
+	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTERSKILL);
+	std::vector<CObject*> Bullet = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::BULLET);
+	for (int i = 0; i < InVecotr.size(); ++i)
+	{
+		for (int j = 0; i < Bullet.size(); ++i)
+		{
+			if (!CheckCollision(InVecotr[j]->GetPosition(), InVecotr[j]->GetScale(), Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
+				continue;
+
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTERSKILL, i);
+			//std::cout << "충돌" << std::endl;
+		}
+	}
+
+	InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTERSKILL);
+	for (int i = 0; i < InVecotr.size(); ++i)
+	{
+		for (int j = 0; i < Bullet.size(); ++i)
+		{
+			if (!CheckCollision(Position, Scale, Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
+				continue;
+
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTERSKILL, i);
+			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::BULLET, j);
+			//std::cout << "충돌" << std::endl;
+		}
 	}
 }

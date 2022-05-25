@@ -28,8 +28,8 @@ void ObjectManager::Init()
 
 void ObjectManager::Update(float InDeltaTime)
 {
-	if (Player)
-		Player->Update(InDeltaTime);
+	/*if (Player)
+		Player->Update(InDeltaTime);*/
 }
 
 void ObjectManager::Render(HDC Inhdc)

@@ -28,7 +28,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Update(float InDeltaTime)
 {
-	BulletSpawnCollTimeCurrent += InDeltaTime;     //이부분 이해도 늘리기 += 하면 작동 = 하면 작동 x 
+	BulletSpawnCollTimeCurrent += InDeltaTime;   
 	if (stage_code == 1)
 	{
 		if (KEY_STATE(KEY::SPACE) == KEY_STATE::HOLD)
@@ -38,7 +38,7 @@ void CPlayer::Update(float InDeltaTime)
 				Vector2D PST = Position;
 
 				CObject* Bullet = new BulletObject(Vector2D{ PST.x ,PST.y }, Vector2D{ 20 ,20 });
-				Bullet->SetObjectType(EOBJ_TYPE::ELLIPSE);
+				Bullet->SetObjectType(EOBJ_TYPE::Bullet);
 				Bullet->SetObjectLayer(OBJ_LAYER::BULLET);
 				Bullet->SetTexture(CResourceManager::GetInstance()->FindTexture("Bullet"));
 				CSceneManager::GetInstance()->AddObject(Bullet);
@@ -57,9 +57,9 @@ void CPlayer::Update(float InDeltaTime)
 				Vector2D PST = Position;
 
 				CObject* Bullet = new Bullet2(Vector2D{ PST.x ,PST.y }, Vector2D{ 20 ,20 });
-				Bullet->SetObjectType(EOBJ_TYPE::ELLIPSE);
+				Bullet->SetObjectType(EOBJ_TYPE::Bullet);
 				Bullet->SetObjectLayer(OBJ_LAYER::BULLET);
-				//Bullet->SetTexture(CResourceManager::GetInstance()->FindTexture("Bullet"));
+				Bullet->SetTexture(CResourceManager::GetInstance()->FindTexture("Bullet"));
 				CSceneManager::GetInstance()->AddObject(Bullet);
 
 				BulletSpawnCollTimeCurrent = 0.f;

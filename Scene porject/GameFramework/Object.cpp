@@ -3,14 +3,14 @@
 CObject::CObject()
 	: Position()
 	, Scale()
-	, ObjType(EOBJ_TYPE::RECTANGLE)
+	, ObjType(EOBJ_TYPE::Monster)
 {
 
 }
 CObject::CObject(Vector2D InPosition, Vector2D InScale)
 	: Position(InPosition)
 	, Scale(InScale)
-	, ObjType(EOBJ_TYPE::RECTANGLE)
+	, ObjType(EOBJ_TYPE::Monster)
 {
 	
 }
@@ -56,7 +56,7 @@ void CObject::Update(float InDeltaTime)
 				 0,
 				 SRCCOPY);
 		 }
-		 else if (ObjType == EOBJ_TYPE::ELLIPSE)
+		 else if (ObjType == EOBJ_TYPE::Bullet)
 		 {
 			 BitBlt(InHdc,
 				 Position.x - (Scale.x * 0.5f),
@@ -70,7 +70,7 @@ void CObject::Update(float InDeltaTime)
 				 0,
 				 SRCCOPY);
 		 }
-		 else if ( ObjType == EOBJ_TYPE::Bullet)
+		 else if (ObjType == EOBJ_TYPE::MonsterSkill)
 		 {
 			 BitBlt(InHdc,
 				 Position.x - (Scale.x * 0.5f),
@@ -84,13 +84,25 @@ void CObject::Update(float InDeltaTime)
 				 0,
 				 SRCCOPY);
 		 }
-		 else if (ObjType == EOBJ_TYPE::RECTANGLE)
+		 else if (ObjType == EOBJ_TYPE::Monster)
 		 {
 			 BitBlt(InHdc,
 				 Position.x - (Scale.x * 0.5f),
 				 Position.y - (Scale.y * 0.5f),
 				 //Scale.x,
 				 //Scale.y,
+				 Texture->GetWidth(),
+				 Texture->GetHeight(),
+				 Texture->GetHdc(),
+				 0,
+				 0,
+				 SRCCOPY);
+		 }
+		 else if (ObjType == EOBJ_TYPE::BackGrund)
+		 {
+			 BitBlt(InHdc,
+				 Position.x ,
+				 Position.y ,
 				 Texture->GetWidth(),
 				 Texture->GetHeight(),
 				 Texture->GetHdc(),
@@ -101,7 +113,7 @@ void CObject::Update(float InDeltaTime)
 	 }
 	 else
 	 {
-		 if (ObjType == EOBJ_TYPE::RECTANGLE || ObjType == EOBJ_TYPE::Player)
+		 if (ObjType == EOBJ_TYPE::Monster || ObjType == EOBJ_TYPE::Player)
 		 {
 			 Rectangle(InHdc,
 				 Position.x - (Scale.x * 0.5f),
@@ -109,7 +121,7 @@ void CObject::Update(float InDeltaTime)
 				 Position.x + (Scale.x * 0.5f),
 				 Position.y + (Scale.y * 0.5f));
 		 }
-		 if (ObjType == EOBJ_TYPE::ELLIPSE || ObjType == EOBJ_TYPE::Bullet)
+		 if (ObjType == EOBJ_TYPE::MonsterSkill || ObjType == EOBJ_TYPE::Bullet)
 		 {
 			 Ellipse(InHdc,
 				 Position.x - (Scale.x * 0.5f),

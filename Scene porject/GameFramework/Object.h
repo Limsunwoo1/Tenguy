@@ -4,21 +4,22 @@
 class CTexture;
 
 enum class EOBJ_TYPE {
-	RECTANGLE,
-	ELLIPSE,
-	Player,
-	Bullet,
 	BackGrund,
+	MonsterSkill,
+	Monster,
+	Bullet,
+	Player,
 	UI,
 	Max,
 };
 
 enum class OBJ_LAYER : char { // LAYER : char 모르겠음
-	BACKGROUND	= 0,
-	BULLET		= 6,
-	MONSTER		= 12,
-	PLAYER		= 16,
-	UI			= 32,
+	BACKGROUND		= 0,
+	MONSTERSKILL	= 6,
+	MONSTER			= 12,
+	BULLET			= 18,
+	PLAYER			= 24,
+	UI				= 30,
 	MAX,
 };
 

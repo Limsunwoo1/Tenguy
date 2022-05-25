@@ -23,7 +23,8 @@ void Box2::Update(float InDeltaTime)
 {
 	Position.y += speed * InDeltaTime;
 	BoxRemove();
-	Hit();
+	BoxObject::MonsterHit();
+	BoxObject::MonsterSkill_Hit();
 }
 
 void Box2::BoxRemove()
@@ -32,7 +33,9 @@ void Box2::BoxRemove()
 
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
-		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::ELLIPSE)
+		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::Bullet)
+			continue;
+		if (InVecotr[i]->GetObjectType() == EOBJ_TYPE::BackGrund)
 			continue;
 
 		if (InVecotr[i]->GetPosition().y >= 980)

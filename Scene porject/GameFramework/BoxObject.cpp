@@ -55,8 +55,8 @@ void BoxObject::BoxRemove()
 
 void BoxObject::MonsterHit()
 {
-	std::vector<CObject*> InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
-	std::vector<CObject*> Player = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::PLAYER);
+	const std::vector<CObject*>& InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
+	const std::vector<CObject*>& Player = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::PLAYER);
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
 		for (int j = 0; i < Player.size(); ++i)
@@ -70,11 +70,11 @@ void BoxObject::MonsterHit()
 		}
 	}
 
-	InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTER);
-	std::vector<CObject*> Bullet = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::BULLET);
+	const std::vector<CObject*>& Bullet = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::BULLET);
+
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
-		for (int j = 0; i < Bullet.size(); ++i)
+		for (int j = 0; j < Bullet.size(); ++j)
 		{
 			if (!CheckCollision(InVecotr[i]->GetPosition(), InVecotr[i]->GetScale(), Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
 				continue;
@@ -93,9 +93,9 @@ void BoxObject::MonsterSkill_Hit()
 	std::vector<CObject*> Bullet = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::BULLET);
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
-		for (int j = 0; i < Bullet.size(); ++i)
+		for (int j = 0; j < Bullet.size(); ++j)
 		{
-			if (!CheckCollision(InVecotr[j]->GetPosition(), InVecotr[j]->GetScale(), Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
+			if (!CheckCollision(InVecotr[i]->GetPosition(), InVecotr[i]->GetScale(), Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
 				continue;
 
 			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTERSKILL, i);
@@ -106,9 +106,9 @@ void BoxObject::MonsterSkill_Hit()
 	InVecotr = CSceneManager::GetInstance()->Get_Object(OBJ_LAYER::MONSTERSKILL);
 	for (int i = 0; i < InVecotr.size(); ++i)
 	{
-		for (int j = 0; i < Bullet.size(); ++i)
+		for (int j = 0; j < Bullet.size(); ++j)
 		{
-			if (!CheckCollision(Position, Scale, Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
+			if (!CheckCollision(InVecotr[i]->GetPosition(), InVecotr[i]->GetScale(), Bullet[j]->GetPosition(), Bullet[j]->GetScale()))
 				continue;
 
 			CSceneManager::GetInstance()->SetVectorSize(OBJ_LAYER::MONSTERSKILL, i);
